@@ -39,7 +39,7 @@ repos:
 ```
 
 #### About the configurations
-- ```token```  | string : Token to be used to connect to the GitHub API
+- ```token```  | string : <a href="https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token" target="_blank">Token to be used to connect to the GitHub API</a>
 - ```port``` | int  : Port to expose exporter
 - ```scrap_seconds``` | int : Exporter will analyze events between "current time and scrap_seconds"
 - ```repos``` | list : Repository list to collect events data 
