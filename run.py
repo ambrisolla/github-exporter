@@ -53,8 +53,6 @@ class Collector:
         yield github_api_rate_used
         yield github_api_rate_reset
 
-
-
         ''' Get information about Repositories '''
         repositories = self.pool.map(self.github.repository, self.repos)
         for info in repositories:
@@ -93,8 +91,6 @@ class Collector:
                     'repository': info['repository']
                 })
             yield github_repository_open_issues_count
-
-            value = 1 if info['archived'] == True else 0
 
         actions_workflows_runs = self.pool.map(
             self.github.actions_workflows_runs, self.repos)
