@@ -1,7 +1,15 @@
 # Github Export
 Prometheus exporter for Github metrics.
 
-# Metrics
+## Content
+- [Metrics](#metrics)
+- [Configurations](#configurations)
+- [Installation](#installation)
+- [Docker](#docker)
+- [Limitations](#limitations)
+- [Dashboard](#dashboard)
+
+## Metrics
 
 <table>
   <tr><td><b>Name</b></td><td><b>Description</b></td><td><b>Type</b></td></tr>
@@ -18,7 +26,7 @@ Prometheus exporter for Github metrics.
   <tr><td>github_api_rate_used</td><td>Get rate used</td><td>Gauge</td></tr>
 </table>
 
-# Configurations
+## Configurations
 
 Configure the exporter
 
@@ -30,24 +38,24 @@ repos:
   - user/repo
 ```
 
-### About the configurations
+#### About the configurations
 - ```token```  | string : Token to be used to connect to the GitHub API
 - ```port``` | int  : Port to expose exporter
 - ```scrap_seconds``` | int : Exporter will analyze events between "current time and scrap_seconds"
 - ```repos``` | list : Repository list to collect events data 
 
-# Installation
+## Installation
 
-### Install requirements
+#### Install requirements
 ```bash
 $ pip install -r requirements.txt
 ```
-### Run exporter
+#### Run exporter
 ```bash
 $ python run.py
 ```
 
-# Docker
+## Docker
 ```bash
 $ docker run --name github-exporter \
   -p 9185:9185 \
@@ -55,7 +63,7 @@ $ docker run --name github-exporter \
   -d andrebrisolla/github-exporter
 ```
 
-# Limitations
+## Limitations
  + <b><a href="https://docs.github.com/en/rest/rate-limit?apiVersion=2022-11-28#about-rate-limits" target="_blank">Github API rate limit</a></b>: Github API has a rate limit that limits the number of requests:
    + <b>Without token</b>: 60 requests per hour
    + <b>With a personal token</b>: 5000 requests per hour
@@ -63,7 +71,7 @@ $ docker run --name github-exporter \
 
 It means that more repositories you have set up, more request you will spend. 
 
-# Dashboard
+## Dashboard
 The dashboard below helps us analyze the metrics collected by the exporter.
 
 <img src="grafana/grafana.png" />
