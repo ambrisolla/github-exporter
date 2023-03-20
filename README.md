@@ -1,4 +1,4 @@
-# github-export
+# Github Export
 Prometheus exporter for Github metrics.
 
 # Metrics
