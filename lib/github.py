@@ -14,8 +14,8 @@ class Github:
         self.headers = {"Authorization": f"Bearer {self.token}"}
 
     '''
-    Get repositories informations
-  '''
+      Get repositories informations
+    '''
     
     def limit(self):
         req = requests.get(
@@ -53,8 +53,8 @@ class Github:
         }
 
     '''
-    Get Github Action Workflows runs
-  '''
+      Get Github Action Workflows runs
+    '''
 
     def actions_workflows_runs(self, repo):
         now = datetime.now(pytz.UTC)

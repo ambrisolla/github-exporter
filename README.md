@@ -1,5 +1,5 @@
 # github-export
-A Python script that imports Github API data and generates metrics to be exported to Prometheus.
+A Python script to import Github API data and generate metrics to be exported to Prometheus.
 
 # Purpose
 The main purpose of this project is centralize informations about Github  repositories and observe these informations to determine if the repository and the repository workflows are running as a expected.
@@ -59,7 +59,7 @@ $ docker run --name github-exporter \
 ```
 
 # Limitations
- + <b><a href="https://docs.github.com/en/rest/rate-limit?apiVersion=2022-11-28#about-rate-limits" target="_blank">Github API rate limit</a></b>: Github API has a rate limit that limits the number of requests per hour in:
+ + <b><a href="https://docs.github.com/en/rest/rate-limit?apiVersion=2022-11-28#about-rate-limits" target="_blank">Github API rate limit</a></b>: Github API has a rate limit that limits the number of requests:
    + <b>Without token</b>: 60 requests per hour
    + <b>With a personal token</b>: 5000 requests per hour
    + <b>With a enterprise token</b>: 15000 requests per hour
@@ -69,4 +69,4 @@ The dashboard below helps us analyze the metrics collected by the exporter.
 
 <img src="grafana/grafana.png" />
 
-### Install the dashboard
+<a href="grafana/dashboard.json">Dashboar JSON file</a>
