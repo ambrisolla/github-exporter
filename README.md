@@ -8,9 +8,9 @@ When the exporter are called, the script connects to the Github API returning in
 
 <table>
   <tr><td><b>Name</b></td><td><b>Description</b></td><td><b>Type</b></td></tr>
-  <tr><td>github_actions_workflow_run</td><td>Workflow runs for a repository</td></tr>
-  <tr><td>github_actions_workflow_run_latency</td><td>Workflow runs latency for a repository</td></tr>
-  <tr><td>github_actions_workflow_runs_in_progress</td><td>Workflow runs in progress for a repository</td></tr>
+  <tr><td>github_actions_workflow_run</td><td>Workflow runs for a repository</td><td>Gauge</td></tr>
+  <tr><td>github_actions_workflow_run_latency</td><td>Workflow runs latency for a repository</td><td>Gauge</td></tr>
+  <tr><td>github_actions_workflow_runs_in_progress</td><td>Workflow runs in progress for a repository</td><td>Gauge</td></tr>
   <tr><td>github_actions_workflow_runs_queued</td><td>Workflow runs queued for a repository</td><td>Gauge</td></tr>
   <tr><td>github_pull_request</td><td>Pull Requests for a repository</td><td>Gauge</td></tr>
   <tr><td>github_repository</td><td>Get all repositories</td><td>Gauge</td></tr>
