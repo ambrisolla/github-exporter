@@ -7,15 +7,18 @@ When the exporter are called, the script connects to the Github API returning in
 # Metrics
 
 <table>
-  <tr><td><b>Name</b></td><td><b>Description</b></td><td><b>Type</b></td><td><b>Labels</b></td></tr>
-  <tr><td>github_actions_workflow_run</td><td>Workflow runs for a repository</td><td>Gauge</td><td>Labels</td></tr>
-  <tr><td>github_actions_workflow_run_latency</td><td>Workflow runs latency for a repository</td><td>Gauge</td><td>Labels</td></tr>
-  <tr><td>github_actions_workflow_runs_in_progress</td><td>Workflow runs in progress for a repository</td><td>Gauge</td><td>Labels</td></tr>
-  <tr><td>github_actions_workflow_runs_queued</td><td>Workflow runs queued for a repository</td><td>Gauge</td><td>Labels</td></tr>
-  <tr><td>github_pull_request</td><td>Pull Requests for a repository</td><td>Gauge</td><td>Labels</td></tr>
-  <tr><td>github_repository</td><td>Get all repositories</td><td>Gauge</td><td>Labels</td></tr>
-  <tr><td>github_repository_is_public</td><td>Get repository visibility info</td><td>Gauge</td><td>Labels</td></tr>
-  <tr><td>github_repository_open_issues_count</td><td>Get open issues count for a repository</td><td>Gauge</td><td>Labels</td></tr>
+  <tr><td><b>Name</b></td><td><b>Description</b></td><td><b>Type</b></td></tr>
+  <tr><td>github_actions_workflow_run</td><td>Workflow runs for a repository</td></tr>
+  <tr><td>github_actions_workflow_run_latency</td><td>Workflow runs latency for a repository</td></tr>
+  <tr><td>github_actions_workflow_runs_in_progress</td><td>Workflow runs in progress for a repository</td></tr>
+  <tr><td>github_actions_workflow_runs_queued</td><td>Workflow runs queued for a repository</td><td>Gauge</td></tr>
+  <tr><td>github_pull_request</td><td>Pull Requests for a repository</td><td>Gauge</td></tr>
+  <tr><td>github_repository</td><td>Get all repositories</td><td>Gauge</td></tr>
+  <tr><td>github_repository_is_public</td><td>Get repository visibility info</td><td>Gauge</td></tr>
+  <tr><td>github_repository_open_issues_count</td><td>Get open issues count for a repository</td><td>Gauge</td></tr>
+  <tr><td>github_api_rate_limit</td><td>Get rate limit</td><td>Gauge</td></tr>
+  <tr><td>github_api_rate_reset</td><td>Get when the number of used requests will be reset. </td><td>Gauge</td></tr>
+  <tr><td>github_api_rate_used</td><td>Get rate used</td><td>Gauge</td></tr>
 </table>
 
 # Configurations
@@ -60,6 +63,8 @@ $ docker run --name github-exporter \
    + <b>Without token</b>: 60 requests per hour
    + <b>With a personal token</b>: 5000 requests per hour
    + <b>With a enterprise token</b>: 15000 requests per hour
+
+It means that more repositories you have set up, more request you will spend. 
 
 # Dashboard
 The dashboard below helps us analyze the metrics collected by the exporter.
