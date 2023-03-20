@@ -72,8 +72,6 @@ $ docker run --name github-exporter \
 It means that more repositories you have set up, more request you will spend. 
 
 ## Dashboard
-The dashboard below helps us analyze the metrics collected by the exporter.
+The dashboard below will help you analyze the metrics collected by the exporter. [ <a href="grafana/dashboard.json">JSON file</a> ]
 
 <img src="grafana/grafana.png" />
-
-<a href="grafana/dashboard.json">Dashboard JSON file</a>
