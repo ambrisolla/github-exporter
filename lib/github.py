@@ -1,4 +1,4 @@
-import os
+import sys
 import requests
 import json
 import pytz
@@ -21,6 +21,9 @@ class Github:
         req  = requests.get(
             f'{self.api_url}/rate_limit',
             headers=self.headers)
+        if req.status_code != 200:
+            print(f'Error: {str(req.reason)}\n')
+            sys.exit(1)
         data = json.loads(req.text)
         return data
               

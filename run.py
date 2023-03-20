@@ -21,7 +21,7 @@ class Collector:
 
         ''' Get Github API rate limit '''
         limits = self.github.limit()
-        
+                
         github_api_rate_limit = Metric(
             'github_api_rate_limit',
             'github_api_rate_limit', 
@@ -229,7 +229,7 @@ class Collector:
 if __name__ == '__main__':
     try:
         config = yaml.safe_load(
-            open('/app/config.yaml', 'r').read() )
+            open('config.yaml', 'r').read() )
     except Exception as err:
         print(f'Error: {str(err)}')    
         import sys
