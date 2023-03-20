@@ -69,4 +69,4 @@ The dashboard below helps us analyze the metrics collected by the exporter.
 
 <img src="grafana/grafana.png" />
 
-<a href="grafana/dashboard.json">Dashboar JSON file</a>
+<a href="grafana/dashboard.json">Dashboard JSON file</a>
