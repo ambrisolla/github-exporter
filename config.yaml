@@ -1,0 +1,5 @@
+token: github_token
+port: 9185
+scrap_seconds: 120
+repos: 
+  - user/repo

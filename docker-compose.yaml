@@ -1,0 +1,9 @@
+services:
+  exporter:
+    container_name: github-exporter
+    build: .
+    ports:
+      - "9185:9185"
+    restart: always
+    volumes:
+      - ./config.yaml:/app/config.yaml

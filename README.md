@@ -1,0 +1,72 @@
+# github-export
+A Python script that imports Github API data and generates metrics to be exported to Prometheus.
+
+# Purpose
+The main purpose of this project is centralize informations about Github  repositories and observe these informations to determine if the repository and the repository workflows are running as a expected.
+
+# How it's works
+When the exporter are called, the script connects to the Github API returning information about repositories that we've configured. This informations is analyzed and exported as a Prometheus metric. One point to understand is that if an event  occurs in a time period when the exporter was not working the event will no be stored.
+
+# Metrics
+
+<table>
+  <tr><td><b>Name</b></td><td><b>Description</b></td><td><b>Type</b></td><td><b>Labels</b></td></tr>
+  <tr><td>github_actions_workflow_run</td><td>Workflow runs for a repository</td><td>Gauge</td><td>Labels</td></tr>
+  <tr><td>github_actions_workflow_run_latency</td><td>Workflow runs latency for a repository</td><td>Gauge</td><td>Labels</td></tr>
+  <tr><td>github_actions_workflow_runs_in_progress</td><td>Workflow runs in progress for a repository</td><td>Gauge</td><td>Labels</td></tr>
+  <tr><td>github_actions_workflow_runs_queued</td><td>Workflow runs queued for a repository</td><td>Gauge</td><td>Labels</td></tr>
+  <tr><td>github_pull_request</td><td>Pull Requests for a repository</td><td>Gauge</td><td>Labels</td></tr>
+  <tr><td>github_repository</td><td>Get all repositories</td><td>Gauge</td><td>Labels</td></tr>
+  <tr><td>github_repository_is_public</td><td>Get repository visibility info</td><td>Gauge</td><td>Labels</td></tr>
+  <tr><td>github_repository_open_issues_count</td><td>Get open issues count for a repository</td><td>Gauge</td><td>Labels</td></tr>
+</table>
+
+# Configurations
+
+Configure the exporter
+
+```yaml
+token: github_token 
+port: 9185 
+scrap_seconds: 120 
+repos: 
+  - user/repo
+```
+
+### About the configurations
+- ```token```  | string : Token to be used to connect to the GitHub API
+- ```port``` | int  : Port to expose exporter
+- ```scrap_seconds``` | int : Exporter will analyze events between "current time and scrap_seconds"
+- ```repos``` | list : Repository list to collect events data 
+
+# Installation
+
+### Install requirements
+```bash
+$ pip install -r requirements.txt
+```
+### Run exporter
+```bash
+$ python run.py
+```
+
+# Docker
+```bash
+$ docker run --name github-exporter \
+  -p 9185:9185 \
+  -v ./config.yaml:/app/config.yaml \
+  -d andrebrisolla/github-exporter
+```
+
+# Limitations
+ + <b><a href="https://docs.github.com/en/rest/rate-limit?apiVersion=2022-11-28#about-rate-limits" target="_blank">Github API rate limit</a></b>: Github API has a rate limit that limits the number of requests per hour in:
+   + <b>Without token</b>: 60 requests per hour
+   + <b>With a personal token</b>: 5000 requests per hour
+   + <b>With a enterprise token</b>: 15000 requests per hour
+
+# Dashboard
+The dashboard below helps us analyze the metrics collected by the exporter.
+
+<img src="grafana/grafana.png" />
+
+### Install the dashboard
