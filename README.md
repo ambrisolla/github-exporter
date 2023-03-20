@@ -1,9 +1,6 @@
 # github-export
 Prometheus exporter for Github metrics.
 
-# How it's works
-When the exporter are called, the script connects to the Github API returning information about repositories that we've configured. This informations is analyzed and exported as a Prometheus metric. One point to understand is that if an event  occurs in a time period when the exporter was not working the event will no be stored.
-
 # Metrics
 
 <table>
