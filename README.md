@@ -56,10 +56,13 @@ $ python run.py
 ```
 
 ## Docker
+
+Create config.yaml and run the command below:
+
 ```bash
 $ docker run --name github-exporter \
   -p 9185:9185 \
-  -v ./config.yaml:/app/config.yaml \
+  -v ${PWD}/config.yaml:/app/config.yaml \
   -d andrebrisolla/github-exporter
 ```
 
