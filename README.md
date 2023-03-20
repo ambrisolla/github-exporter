@@ -1,8 +1,5 @@
 # github-export
-A Python script to import Github API data and generate metrics to be exported to Prometheus.
-
-# Purpose
-The main purpose of this project is centralize informations about Github  repositories and observe these informations to determine if the repository and the repository workflows are running as a expected.
+Prometheus exporter for Github metrics.
 
 # How it's works
 When the exporter are called, the script connects to the Github API returning information about repositories that we've configured. This informations is analyzed and exported as a Prometheus metric. One point to understand is that if an event  occurs in a time period when the exporter was not working the event will no be stored.

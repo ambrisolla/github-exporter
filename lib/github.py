@@ -3,13 +3,13 @@ import requests
 import json
 import pytz
 import urllib.parse
-from datetime import datetime, timedelta
+from   datetime import datetime, timedelta
 
 
 class Github:
 
     def __init__(self, **kwargs):
-        self.token = kwargs['token']
+        self.token   = kwargs['token']
         self.api_url = kwargs['api_url']
         self.headers = {"Authorization": f"Bearer {self.token}"}
 
@@ -18,38 +18,38 @@ class Github:
     '''
     
     def limit(self):
-        req = requests.get(
+        req  = requests.get(
             f'{self.api_url}/rate_limit',
             headers=self.headers)
         data = json.loads(req.text)
         return data
               
     def repository(self, repo):
-        req = requests.get(
+        req  = requests.get(
             f'{self.api_url}/repos/{repo}?per_page=100', 
             headers=self.headers)
         data = json.loads(req.text)
-        keys = ['id', 'private', 'name', 'description',
-                'has_issues', 'has_discussions', 'disabled',
-                'visibility', 'default_branch', 'created_at',
-                'updated_at', 'pushed_at', 'full_name', 'open_issues_count',
-                'archived']
+        keys = ['id', 'private', 'name', 
+                'description', 'has_issues', 'has_discussions', 
+                'disabled', 'visibility', 'default_branch', 
+                'created_at', 'updated_at', 'pushed_at', 
+                'full_name', 'open_issues_count', 'archived']
 
         labels = {}
         for key in keys:
-            labels[key] = str(data[key])
+            labels[key]          = str(data[key])
             labels['repository'] = data['full_name']
 
         return labels
 
     def repository_pull_requests(self, repo):
-        req = requests.get(
+        req  = requests.get(
             f'{self.api_url}/repos/{repo}/pulls?per_page=100&state=all',
             headers=self.headers)
         data = json.loads(req.text)
         return {
-            'repository': repo,
-            'pulls': data
+            'repository' : repo,
+            'pulls'      : data
         }
 
     '''
@@ -57,33 +57,35 @@ class Github:
     '''
 
     def actions_workflows_runs(self, repo):
-        now = datetime.now(pytz.UTC)
-        created_at = (now - timedelta(seconds=86400)).isoformat()
-        base_url = f'{self.api_url}/repos/{repo}/actions/runs?created=>={created_at}&per_page=100'
-        req = requests.get(urllib.parse.unquote(
-            base_url), headers=self.headers)
-        data = json.loads(req.text)
-        runs = []
+        now               = datetime.now(pytz.UTC)
+        created_at        = (now - timedelta(seconds=86400)).isoformat()
+        base_url          = f'{self.api_url}/repos/{repo}/actions/runs?created=>={created_at}&per_page=100'
+        req               = requests.get(
+            urllib.parse.unquote(base_url), 
+            headers = self.headers)
+        data              = json.loads(req.text)
+        runs              = []
         in_progress_count = 0
-        queued_count = 0
+        queued_count      = 0
 
         if req.status_code == 200:
             data = json.loads(req.text)
             if data['total_count'] > 0:
                 keys = [
                     'id', 'name', 'head_sha', 'path',
-                    'display_title', 'event', 'run_number', 'status', 'conclusion',
-                    'workflow_id', 'created_at', 'updated_at', 'run_started_at']
+                    'display_title', 'event', 'run_number', 
+                    'status', 'conclusion', 'workflow_id', 
+                    'created_at', 'updated_at', 'run_started_at' ]
 
                 for run in data['workflow_runs']:
                     labels = {}
                     for key in keys:
                         labels[key] = str(run[key])
-                    labels['author_name'] = run['head_commit']['author']['name']
-                    labels['author_email'] = run['head_commit']['author']['email']
-                    labels['committer_name'] = run['head_commit']['committer']['name']
+                    labels['author_name']     = run['head_commit']['author']['name']
+                    labels['author_email']    = run['head_commit']['author']['email']
+                    labels['committer_name']  = run['head_commit']['committer']['name']
                     labels['committer_email'] = run['head_commit']['committer']['email']
-                    labels['repository'] = run['repository']['full_name']
+                    labels['repository']      = run['repository']['full_name']
                     labels['repository_name'] = run['repository']['name']
 
                     runs.append(labels)
@@ -94,8 +96,8 @@ class Github:
                         queued_count = queued_count + 1
 
             return {
-                'runs': runs,
-                'in_progress_count': in_progress_count,
-                'queued_count': queued_count,
-                'repository': repo
+                'runs'              : runs,
+                'in_progress_count' : in_progress_count,
+                'queued_count'      : queued_count,
+                'repository'        : repo
             }

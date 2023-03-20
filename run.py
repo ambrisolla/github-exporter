@@ -1,10 +1,10 @@
 import time
 import yaml
-from prometheus_client import start_http_server, Metric, CollectorRegistry
-from multiprocessing import Pool
-from datetime import datetime
-from lib.github import Github
-from datetime import datetime
+from   prometheus_client import start_http_server, Metric, CollectorRegistry
+from   multiprocessing   import Pool
+from   datetime          import datetime
+from   lib.github        import Github
+from   datetime          import datetime
 
 class Collector:
 
