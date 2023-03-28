@@ -14,4 +14,4 @@ EXPOSE 9185
 
 COPY . .
 
-CMD ["python3", "/app/run.py"]
+ENTRYPOINT ["/app/run.py"]

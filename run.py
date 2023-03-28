@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 import time
 import yaml
 from   prometheus_client import start_http_server, Metric, CollectorRegistry
@@ -5,13 +7,52 @@ from   multiprocessing   import Pool
 from   datetime          import datetime
 from   lib.github        import Github
 from   datetime          import datetime
+from   argparse          import ArgumentParser
+
+class Configurations:
+    
+    def __init__(self):
+
+        arg = ArgumentParser()
+    
+        arg.add_argument(
+            '--token', 
+            help='Github Token', 
+            required=True)
+        
+        arg.add_argument(
+            '--http-server-port', 
+            help='Port to start http-server', 
+            required=True)
+        
+        arg.add_argument(
+            '--scrape-seconds', 
+            help='Consider events executed  at N seconds ago.', 
+            required=True)
+        
+        arg.add_argument(
+            '--repos', 
+            help='Repositories to be scanned', 
+            required=True)
+
+        args = vars(arg.parse_args())
+        
+        self.token            = args['token']
+        self.url              = 'https://api.github.com'
+        self.http_server_port = int(args['http_server_port'])
+        self.repos            = args['repos'].split(',')
+        self.scrape_seconds   = int(args['scrape_seconds'])
+
 
 class Collector:
 
-    def __init__(self, **config):
-        self.repos         = config['repos']
-        self.token         = config['token']
-        self.scrap_seconds = int(config['scrap_seconds'])
+    def __init__(self):
+
+        config = Configurations()
+
+        self.repos         = config.repos
+        self.token         = config.token
+        self.scrap_seconds = int(config.scrape_seconds)
         self.api_url       = 'https://api.github.com'
         self.github        = Github(token=self.token, api_url=self.api_url)
         self.pool          = Pool(16)
@@ -227,18 +268,9 @@ class Collector:
                         yield github_pull_request
 
 if __name__ == '__main__':
-    try:
-        config = yaml.safe_load(
-            open('config.yaml', 'r').read() )
-    except Exception as err:
-        print(f'Error: {str(err)}')    
-        import sys
-        sys.exit(1)
+    config = Configurations()
     start_http_server(
-        int(config['port']), 
-        registry=Collector(
-            repos         = config['repos'],
-            scrap_seconds = config['scrap_seconds'],
-            token         = config['token']))
+        int(config.http_server_port), 
+        registry=Collector())
     while True:
         time.sleep(1)

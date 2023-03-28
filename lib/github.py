@@ -39,6 +39,7 @@ class Github:
                 'full_name', 'open_issues_count', 'archived']
 
         labels = {}
+        
         for key in keys:
             labels[key]          = str(data[key])
             labels['repository'] = data['full_name']
