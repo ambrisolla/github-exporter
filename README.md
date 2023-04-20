@@ -3,9 +3,8 @@ Prometheus exporter for Github metrics.
 
 ## Content
 - [Metrics](#metrics)
-- [Configurations](#configurations)
-- [Installation](#installation)
-- [Docker](#docker)
+- [Requisites](#Requisites)
+- [Usage](#Usage)
 - [Limitations](#limitations)
 - [Dashboard](#dashboard)
 
@@ -25,6 +24,13 @@ Prometheus exporter for Github metrics.
   <tr><td>github_api_rate_reset</td><td>Get when the number of used requests will be reset. </td><td>Gauge</td></tr>
   <tr><td>github_api_rate_used</td><td>Get rate used</td><td>Gauge</td></tr>
 </table>
+
+## Requisites
+Install Prometheu sClient for Python
+```bash
+pip install prometheus-client
+```
+
 
 ## Usage
 ```bash
