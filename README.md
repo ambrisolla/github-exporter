@@ -26,9 +26,9 @@ Prometheus exporter for Github metrics.
 </table>
 
 ## Requisites
-Install Prometheu sClient for Python
+Install the following packages
 ```bash
-pip install prometheus-client
+pip install prometheus-client pytz
 ```
 
 
