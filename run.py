@@ -13,7 +13,8 @@ class Configurations:
     
     def __init__(self):
 
-        arg = ArgumentParser()
+        arg = ArgumentParser(prog='github-exporter.py', description='Github Exporter for Prometheus'
+                             )
     
         arg.add_argument(
             '--token', 

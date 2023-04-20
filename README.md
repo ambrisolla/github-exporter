@@ -26,44 +26,23 @@ Prometheus exporter for Github metrics.
   <tr><td>github_api_rate_used</td><td>Get rate used</td><td>Gauge</td></tr>
 </table>
 
-## Configurations
-
-Configure the exporter
-
-```yaml
-token: github_token 
-port: 9185 
-scrap_seconds: 120 
-repos: 
-  - user/repo
-```
-
-#### About the configurations
-- ```token```  | string : <a href="https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token" target="_blank">Token</a> to be used to connect to the GitHub API
-- ```port``` | int  : Port to expose exporter
-- ```scrap_seconds``` | int : Exporter will analyze events between "current time and scrap_seconds"
-- ```repos``` | list : Repository list to collect events data 
-
-## Installation
-
-#### Install requirements
+## Usage
 ```bash
-$ pip install -r requirements.txt
-```
-#### Run exporter
-```bash
-$ python run.py
-```
+usage: github-exporter.py [-h] --token TOKEN \
+  --http-server-port HTTP_SERVER_PORT \
+  --scrape-seconds SCRAPE_SECONDS \
+  --repos "userA/repo1,userA/repo2"
 
-## Docker
+Github Exporter for Prometheus
 
-Create config.yaml and run the command below:
-
-```bash
-$ docker run --name github-exporter \
-  -p 9185:9185 \
-  -v ${PWD}/config.yaml:/app/config.yaml \
-  -d andrebrisolla/github-exporter
+options:
+  -h, --help            show this help message and exit
+  --token TOKEN         Github Token
+  --http-server-port HTTP_SERVER_PORT
+                        Port to start http-server
+  --scrape-seconds SCRAPE_SECONDS
+                        Consider events executed at N seconds ago.
+  --repos REPOS         Repositories to be scanned
 ```
 
 ## Limitations
